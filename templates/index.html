@@ -1,0 +1,110 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Employee Time Tracker</title>-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--     <style>-->
+<!--        body {-->
+<!--            background-image: url('/static/topgun.jpg');-->
+<!--            background-size: cover;-->
+<!--            background-repeat: no-repeat;-->
+<!--            background-attachment: fixed;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="container mt-5">-->
+<!--        <h1>Employee Time Tracker</h1>-->
+<!--        <table class="table table-bordered">-->
+<!--            <thead>-->
+<!--                <tr>-->
+<!--                    <th>Name</th>-->
+<!--                    <th>Start Time</th>-->
+<!--                    <th>End Time</th>-->
+<!--                    <th>Actions</th>-->
+<!--                </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--                {% for employee in employees %}-->
+<!--                <tr>-->
+<!--                    <td>{{ employee.name }}</td>-->
+<!--                    <td>{{ employee.start_time }}</td>-->
+<!--                    <td>{{ employee.end_time }}</td>-->
+<!--                    <td>-->
+<!--                        {% if employee.status == "Not Working" %}-->
+<!--                            <a href="{{ url_for('start_shift', id=employee.id) }}" class="btn btn-success">Start</a>-->
+<!--                        {% else %}-->
+<!--                            <a href="{{ url_for('end_shift', id=employee.id) }}" class="btn btn-danger">Stop</a>-->
+<!--                        {% endif %}-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                {% endfor %}-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Time Tracker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-image: url('/static/topgun.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding-top: 50px;
+        }
+        .employee-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .employee-card:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn-start {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-stop {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-start:hover,
+        .btn-stop:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Employee Time Tracker</h1>
+        <div class="row">
+            {% for employee in employees %}
+            <div class="col-md-4">
+                <div class="employee-card">
+                    <h4>{{ employee.name }}</h4>
+                    <p><strong>Start Time:</strong> {{ employee.start_time }}</p>
+                    <p><strong>End Time:</strong> {{ employee.end_time }}</p>
+                    <div class="text-center">
+                        {% if employee.status == "Not Working" %}
+                            <a href="{{ url_for('start_shift', id=employee.id) }}" class="btn btn-start">Start</a>
+                        {% else %}
+                            <a href="{{ url_for('end_shift', id=employee.id) }}" class="btn btn-stop">Stop</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
